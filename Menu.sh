@@ -4,14 +4,14 @@
 
 # User/config
 USERNAME="                                                            Grackle_OS v0.1 "
-ART="    __   __                  __   __  
-   / _  |__)  /\            /  \ /__  
-   \__> |  \ /~~\    ___    \__/ .__/ "
-BLANKLINES=5
+ART="                                         .__    .  .   ._.   .      .__    
+                                         [ __   |  |    |    |      |  \   
+                                         [_./ * |__| * _|_ * |___ * |__/ * "
+BLANKLINES=4
 
 
 # Menu choices
-options=("Apps" "and" "Exit")
+options=("Apps" "Sqwak" "Exit")
 selected=0
 
 # Description text
@@ -80,7 +80,7 @@ while true; do
         if [[ $selected -eq 0 ]]; then
             bash submenu/1/menu.sh
 		elif [[ $selected -eq 1 ]]; then
-			echo "hello world 2"
+			bash chat/menu.sh
         else
             bash config/exit.sh
 			exit

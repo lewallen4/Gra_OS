@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-# Simple interactive Bash menu with arrow keys and highlight
+# Menu level 1
 
 # User/config
-USERNAME="Grackle_OS"
-ART="                                              ╔═╝  ╔═║  ╔═║       ╔═║╔═╝    
-                                             ║║ ║  ╔╔╝  ╔═║       ║ ║══║    
-                                              ══╝  ╝ ╝  ╝ ╝  ══╝  ══╝══╝    "
-BLANKLINES=5
+USERNAME="                                                            Grackle_OS v0.1 "
+ART="                                         .__    .  .   ._.   .      .__    
+                                         [ __   |  |    |    |      |  \   
+                                         [_./ * |__| * _|_ * |___ * |__/ * "
+BLANKLINES=4
+
 
 # Menu choices
-options=("QuakedIRL      // Earthquakes" "next" "Back")
+options=("QuakedIRL      // Earthquakes" "Cloudsy        // Weather" "Minibench      // Benchmarks" "Back")
 selected=0
 
 # Description text
@@ -26,7 +27,7 @@ draw_menu() {
 
     # Place ASCII art on the right (first)
     while IFS= read -r line; do
-        printf "%% %-102s%%\n" "$line"
+        printf "%% %-76s%%\n" "$line"
     done <<< "$ART"
 
     echo "%%%%%---------------------------------------------------------------------%%%%%"
@@ -95,7 +96,41 @@ while true; do
 				bash submenu/1/menu.sh
 			fi
 		elif [[ $selected -eq 1 ]]; then
-			bash submenu/1/menu.sh
+            if cat apps/installed.txt | grep "cloudsy" ; then
+				cd apps/cloudsy
+				git pull
+				bash script.sh
+				cd ..
+				cd ..
+				bash submenu/1/menu.sh
+			else
+				mkdir apps/cloudsy
+				git clone "https://github.com/lewallen4/Cloudsy.git" apps/cloudsy
+				echo "cloudsy" >> apps/installed.txt
+				cd apps/cloudsy
+				bash script.sh
+				cd ..
+				cd ..
+				bash submenu/1/menu.sh
+			fi
+		elif [[ $selected -eq 2 ]]; then
+            if cat apps/installed.txt | grep "minibench" ; then
+				cd apps/minibench
+				git pull
+				bash minibench.sh
+				cd ..
+				cd ..
+				bash submenu/1/menu.sh
+			else
+				mkdir apps/minibench
+				git clone "https://github.com/lewallen4/Minibench.git" apps/minibench
+				echo "minibench" >> apps/installed.txt
+				cd apps/minibench
+				bash minibench.sh
+				cd ..
+				cd ..
+				bash submenu/1/menu.sh
+			fi
         else
             bash menu.sh
         fi
