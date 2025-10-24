@@ -153,7 +153,7 @@ format_messages() {
             esac
             
             # Truncate long messages to fit screen
-            local max_msg_len=$((COLS - ${#user} - 5))
+            local max_msg_len=$((COLS - ${#user} - 8))
             if [[ ${#message} -gt $max_msg_len ]]; then
                 message="${message:0:$max_msg_len}..."
             fi
