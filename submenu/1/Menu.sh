@@ -118,6 +118,7 @@ while true; do
 				cd apps/minibench
 				git pull
 				bash minibench.sh
+				read -n 1 -s -r -p "Press any key to continue..."
 				cd ..
 				cd ..
 				bash submenu/1/menu.sh

@@ -11,7 +11,7 @@ BLANKLINES=4
 
 
 # Menu choices
-options=("Apps" "Sqwak" "Exit")
+options=("Apps" "Sqwak" "Core" "Exit")
 selected=0
 
 # Description text
@@ -81,6 +81,24 @@ while true; do
             bash submenu/1/menu.sh
 		elif [[ $selected -eq 1 ]]; then
 			bash chat/menu.sh
+		elif [[ $selected -eq 2 ]]; then
+            if cat apps/installed.txt | grep "Core" ; then
+				cd apps/Core
+				git pull
+				bash sysmon-full.sh
+				cd ..
+				cd ..
+				bash menu.sh
+			else
+				mkdir apps/Core
+				git clone "https://github.com/lewallen4/core-sysmon.git" apps/Core
+				echo "Core" >> apps/installed.txt
+				cd apps/Core
+				bash sysmon-full.sh
+				cd ..
+				cd ..
+				bash menu.sh
+			fi
         else
             bash config/exit.sh
 			exit
