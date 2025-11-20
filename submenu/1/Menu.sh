@@ -4,10 +4,10 @@
 
 # User/config
 USERNAME="                                                            Grackle_OS v0.1 "
-ART="                                         .__    .  .   ._.   .      .__    
-                                         [ __   |  |    |    |      |  \   
-                                         [_./ * |__| * _|_ * |___ * |__/ * "
-BLANKLINES=4
+ART="                                                   ┌─┐┬─┐┌─┐┌─┐┬┌─┬  ┌─┐    
+                                                   │ ┬├┬┘├─┤│  ├┴┐│  ├┤     
+                                                   └─┘┴└─┴ ┴└─┘┴ ┴┴─┘└─┘ v1 "
+BLANKLINES=3
 
 
 # Menu choices
@@ -16,21 +16,29 @@ selected=0
 
 # Description text
 DESCRIPTION="
+
     Choose an App,
                      It will be installed if it is not detected"
 
 draw_menu() {
     clear
-    echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    printf "%% %-76s%%\n" "$USERNAME"
-    echo "%%%%%---------------------------------------------------------------------%%%%%"
+    echo -e "\e[48;5;98m                                                                               \e[0m"
+    #printf "%% %-76s%%\n" "$USERNAME"
 
     # Place ASCII art on the right (first)
     while IFS= read -r line; do
         printf "%% %-76s%%\n" "$line"
     done <<< "$ART"
+	declare -A COLORS=(
+	  ["743ADE"]=98
+	  ["FFCD30"]=221
+	  ["28CF77"]=42
+	)
 
-    echo "%%%%%---------------------------------------------------------------------%%%%%"
+	for HEX in "${!COLORS[@]}"; do
+	  CODE=${COLORS[$HEX]}
+	  echo -e "\e[48;5;${CODE}m                                                                               \e[0m"
+	done
 
     # Description section
     while IFS= read -r line; do
@@ -42,7 +50,7 @@ draw_menu() {
         printf "%% %-76s%%\n" " "
     done
 
-    echo "%%%%%---------------------------------------------------------------------%%%%%"
+    echo -e "\e[48;5;98m                                                                               \e[0m"
 
     # Menu area (with blank line above and below)
     printf "%% %-76s%%\n" " "   # blank line
@@ -55,7 +63,7 @@ draw_menu() {
     done
     printf "%% %-76s%%\n" " "   # blank line
 
-    echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+    echo -e "\e[48;5;98m                                                                               \e[0m"
     echo "Use ↑/↓ arrows to move, Enter to select"
 }
 
