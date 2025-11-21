@@ -4,7 +4,7 @@
 # Simple terminal-based chat client
 
 # Configuration
-SERVER_URL="https://708df46d8baf.ngrok-free.app"
+SERVER_URL="https://lewallen4.github.io/guildchat/"
 USERNAME=$(hostname)
 MESSAGE_QUEUE_FILE="/tmp/sqwak_queue_${USERNAME}.txt"
 REFRESH_INTERVAL=30
