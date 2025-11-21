@@ -214,7 +214,6 @@ get_user_input() {
 }
 
 # Main chat loop
-# Main chat loop
 main() {
     # Initial setup
     tput civis
